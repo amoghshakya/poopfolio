@@ -31,7 +31,8 @@ export default function TOC({
             },
             {
                 root: null, // set default as the viewport?
-                threshold: 0.8, // when 30% or 60% of the section is visible
+                threshold: isMobile ? 0.9 : 0,
+                rootMargin: isMobile ? "" : "-50% 0px",
             },
         );
 
@@ -99,6 +100,8 @@ export default function TOC({
                     <AnimatedTitle
                         isVisible={isVisible}
                         message={activeTitle ?? ""}
+                        staggerDelay={0}
+                        href={`#${activeSection}`}
                     />
                 )
                 : (

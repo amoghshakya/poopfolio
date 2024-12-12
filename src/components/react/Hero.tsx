@@ -4,7 +4,7 @@ import StaggeredFadeIn from "./StaggeredFadeIn";
 export function Hero() {
     return (
         <>
-            <section className="max-md:py-20 transition md:h-screen flex flex-col justify-center">
+            <section className="max-md:pt-28 max-md:pb-12 transition md:h-screen flex flex-col justify-center">
                 <StaggeredFadeIn delay={0.03} duration={0.5}>
                     <h5>Hi, I'm</h5>
                     <h1>Amogh Shakya</h1>

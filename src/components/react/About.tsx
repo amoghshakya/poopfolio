@@ -3,7 +3,7 @@ import StaggeredFadeIn from "./StaggeredFadeIn";
 
 const About: React.FC = () => {
     return (
-        <section id="about" className="relative">
+        <section id="about" className="relative py-16 md:py-28">
             <StaggeredFadeIn>
                 <h2 className="sticky top-0 lg:block w-full">About me</h2>
                 <p>

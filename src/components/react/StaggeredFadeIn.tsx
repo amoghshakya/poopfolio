@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
-interface StaggeredFadeInProps {
+interface StaggeredFadeInProps extends React.HTMLProps<HTMLDivElement> {
     children?: React.ReactNode;
+    className?: string;
     delay?: number;
     duration?: number;
 }
 
 const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = (
-    { children, delay = 0.03, duration = 0.6 },
+    { children, className, delay = 0.03, duration = 0.6, ...props },
 ) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -47,6 +48,8 @@ const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = (
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             variants={containerVariants}
+            className={className}
+            {...props}
         >
             {React.Children.map(
                 children,

@@ -3,11 +3,20 @@ import { SITE_TITLE } from "../../consts";
 import { useEffect, useState } from "react";
 
 export default function AnimatedTitle(
-    { isVisible, message, className, hoverMessages = ["whoami"] }: {
+    {
+        isVisible,
+        message,
+        className,
+        href = "/",
+        staggerDelay = 0.03,
+        hoverMessages = ["whoami"],
+    }: {
         isVisible: boolean;
         hoverMessages?: string[];
         message?: string;
         className?: string;
+        staggerDelay?: number;
+        href?: string;
     },
 ) {
     const [content, setContent] = useState(message ?? SITE_TITLE);
@@ -22,14 +31,14 @@ export default function AnimatedTitle(
         hidden: {
             opacity: 0,
             transition: {
-                staggerChildren: 0.03,
+                staggerChildren: staggerDelay,
                 staggerDirection: -1,
             },
         },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.03,
+                staggerChildren: staggerDelay,
                 staggerDirection: 1,
             },
         },
@@ -89,7 +98,7 @@ export default function AnimatedTitle(
             }}
         >
             <motion.a
-                href={isVisible ? "/" : undefined}
+                href={isVisible ? href : undefined}
                 aria-hidden={!isVisible}
             >
                 {content.split("").map((letter, index) => (
