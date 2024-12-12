@@ -1,5 +1,5 @@
 import React from "react";
-import { HiArrowUpRight } from "react-icons/hi2";
+import { HiMiniArrowUpRight } from "react-icons/hi2";
 import StaggeredFadeIn from "./StaggeredFadeIn";
 
 interface CardProps {
@@ -44,25 +44,13 @@ interface CardTitleProps {
 
 const CardTitle: React.FC<CardTitleProps> = ({ children, className = "" }) => {
     const isLinked = React.useContext(CardLinkContext);
-    if (isLinked) {
-        return (
-            <h3
-                className={`text-lg font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
-            >
-                {children}
-                {isLinked && (
-                    <HiArrowUpRight className="ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                )}
-            </h3>
-        );
-    }
     return (
         <h3
             className={`text-lg font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
         >
             {children}
             {isLinked && (
-                <HiArrowUpRight className="ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <HiMiniArrowUpRight className="ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             )}
         </h3>
     );

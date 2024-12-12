@@ -13,6 +13,25 @@ const sections = [
     { id: "skills", title: "Skills" },
     { id: "contact", title: "Contact" },
 ];
+
+const projects = [
+    {
+        title: "SikshaYatri",
+        description:
+            "Developed a demo e-learning platform web app using Next.js and PostgreSQL for my sophomore year Software Engineering coursework. Used Prisma ORM and Neon for database and next-auth for authentication.",
+
+        href: "https://youtu.be/oz0KJD5Y2GQ",
+        github: "https://github.com/amoghshakya/e-learning-platform",
+        youtube: "https://youtu.be/oz0KJD5Y2GQ",
+    },
+    {
+        title: "Book Recommendation System (BooksMandala dataset)",
+        description:
+            "Scraped BooksMandala's book catalog to create a dataset. Used Python, Pandas, and Scikit-learn to develop a book recommendation system based on book metadata like genres, subgenres, and synopsis. Used cosine similarity to recommend books to users.",
+        href: "https://github.com/amoghshakya/booksmandala-data-analytics",
+        github: "https://github.com/amoghshakya/booksmandala-data-analytics",
+    },
+];
 ---
 
 <html>
@@ -25,7 +44,7 @@ const sections = [
         <main class="space-y-24">
             <Hero client:load />
             <About client:visible />
-            <Projects client:visible />
+            <Projects client:visible projects={projects} />
             <section id="skills" class="h-screen"></section>
             <section id="contact" class="h-screen"></section>
         </main>
