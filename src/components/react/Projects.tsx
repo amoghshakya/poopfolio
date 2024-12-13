@@ -19,8 +19,13 @@ interface ProjectsProps {
 function Projects({ projects }: ProjectsProps) {
     return (
         <section id="projects" className="relative">
+            <StaggeredFadeIn className="z-40 my-2 max-sm:bg-base/80 max-sm:sticky top-0 w-full lg:block py-4 bg-transparent max-sm:backdrop-blur-sm">
+                <h2 className="max-sm:text-sm max-sm:uppercase max-sm:tracking-wide">
+                    Projects
+                </h2>
+            </StaggeredFadeIn>
             <StaggeredFadeIn>
-                <h2 className="sticky top-0 lg:block my-8">Projects</h2>
+                {/* <h2 className="sticky top-0 lg:block my-8">Projects</h2> */}
                 <StaggeredFadeIn className="space-y-4">
                     {projects.map((project, i) => (
                         <ProjectItem

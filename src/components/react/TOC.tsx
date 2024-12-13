@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import AnimatedTitle from "./Title";
+import { AnimatedTitle } from "./Title";
 import { useIsMobile } from "./hooks/useIsMobile";
 
 interface IProps {
@@ -11,8 +11,6 @@ interface IProps {
     isVisible: boolean;
 }
 
-// this component should double as a table of contents on desktops
-// and a section header on mobile devices
 export default function TOC({
     sections,
     isVisible,
@@ -31,8 +29,8 @@ export default function TOC({
             },
             {
                 root: null, // set default as the viewport?
-                threshold: isMobile ? 0.9 : 0,
-                rootMargin: isMobile ? "" : "-50% 0px",
+                threshold: 0,
+                rootMargin: "-50% 0px",
             },
         );
 
@@ -45,9 +43,6 @@ export default function TOC({
             sectionElements.forEach((el) => el && observer.unobserve(el));
         };
     }, [activeSection, sections]);
-
-    const activeTitle = sections.find((section) => section.id === activeSection)
-        ?.title;
 
     const handleClick = (id: string) => {
         const element = document.getElementById(id);
@@ -95,59 +90,48 @@ export default function TOC({
 
     return (
         <>
-            {isMobile
-                ? (
-                    <AnimatedTitle
-                        isVisible={isVisible}
-                        message={activeTitle ?? ""}
-                        staggerDelay={0}
-                        href={`#${activeSection}`}
-                    />
-                )
-                : (
-                    <motion.nav
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate={isVisible ? "visible" : "hidden"}
-                        className="hidden lg:block"
-                    >
-                        <motion.ul className="space-y-4 font-semibold">
-                            {sections.map((section) => (
-                                <motion.li
-                                    key={section.id}
-                                    variants={childVariants}
-                                    whileHover={{
-                                        x: 10,
-                                        fontWeight: "bolder",
-                                        transition: {
-                                            duration: 0.2,
-                                            ease: "easeIn",
-                                        },
-                                    }}
-                                    className={`relative list-none transition-all uppercase text-xs hover:font-bold select-none ${
-                                        activeSection === section.id
-                                            ? "!font-extrabold text-green pl-2"
-                                            : "text-text/75 font-semibold"
-                                    }`}
-                                >
-                                    {isVisible
-                                        ? (
-                                            <a
-                                                href={`#${section.id}`}
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    handleClick(section.id);
-                                                }}
-                                            >
-                                                {section.title}
-                                            </a>
-                                        )
-                                        : <span>{section.title}</span>}
-                                </motion.li>
-                            ))}
-                        </motion.ul>
-                    </motion.nav>
-                )}
+            <motion.nav
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible ? "visible" : "hidden"}
+                className="hidden lg:block"
+            >
+                <motion.ul className="space-y-4 font-semibold">
+                    {sections.map((section) => (
+                        <motion.li
+                            key={section.id}
+                            variants={childVariants}
+                            whileHover={{
+                                x: 10,
+                                fontWeight: "bolder",
+                                transition: {
+                                    duration: 0.2,
+                                    ease: "easeIn",
+                                },
+                            }}
+                            className={`relative list-none transition-all uppercase text-xs hover:font-bold select-none ${
+                                activeSection === section.id
+                                    ? "!font-extrabold text-green pl-2"
+                                    : "text-text/75 font-semibold"
+                            }`}
+                        >
+                            {isVisible
+                                ? (
+                                    <span
+                                        className="cursor-pointer"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleClick(section.id);
+                                        }}
+                                    >
+                                        {section.title}
+                                    </span>
+                                )
+                                : <span>{section.title}</span>}
+                        </motion.li>
+                    ))}
+                </motion.ul>
+            </motion.nav>
         </>
     );
 }

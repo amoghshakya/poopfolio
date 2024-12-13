@@ -5,14 +5,6 @@ import Footer from "../components/Footer.astro";
 import { Hero } from "../components/react/Hero";
 import About from "../components/react/About";
 import Projects from "../components/react/Projects";
-import DynamicStickyHeader from "../components/react/DynamicStickyHeader";
-
-const sections = [
-    { id: "about", title: "About" },
-    { id: "projects", title: "Projects" },
-    { id: "skills", title: "Skills" },
-    { id: "contact", title: "Contact" },
-];
 
 const projects = [
     {
@@ -27,7 +19,7 @@ const projects = [
     {
         title: "Book Recommendation System (BooksMandala dataset)",
         description:
-            "Scraped BooksMandala's book catalog to create a dataset. Used Python, Pandas, and Scikit-learn to develop a book recommendation system based on book metadata like genres, subgenres, and synopsis. Used cosine similarity to recommend books to users.",
+            "Scraped BooksMandala's book catalog to create a dataset. Used Python, Pandas, and Scikit-learn to develop a book recommendation system based on book metadata like genres, subgenres, and synopsis. Used cosine similarity to get book recommendations.",
         href: "https://github.com/amoghshakya/booksmandala-data-analytics",
         github: "https://github.com/amoghshakya/booksmandala-data-analytics",
     },
@@ -39,14 +31,12 @@ const projects = [
         title="Amogh Shakya"
         description="Welcome to my web portfolio! It sucks!"
     />
-    <body class="mocha relative antialiased">
+    <body class="mocha antialiased">
         <Header />
         <main class="space-y-24">
             <Hero client:load />
             <About client:visible />
             <Projects client:visible projects={projects} />
-            <section id="skills" class="h-screen"></section>
-            <section id="contact" class="h-screen"></section>
         </main>
 
         <Footer />

@@ -2,28 +2,33 @@ import { motion } from "motion/react";
 import { SITE_TITLE } from "../../consts";
 import { useEffect, useState } from "react";
 
-export default function AnimatedTitle(
+interface AnimatedTitleProps {
+    isVisible: boolean;
+    hoverMessages?: string[];
+    message?: string;
+    className?: string;
+    staggerDelay?: number;
+    href?: string;
+    delay?: number;
+}
+
+export function AnimatedTitle(
     {
         isVisible,
         message,
         className,
         href = "/",
         staggerDelay = 0.03,
-        hoverMessages = ["whoami"],
-    }: {
-        isVisible: boolean;
-        hoverMessages?: string[];
-        message?: string;
-        className?: string;
-        staggerDelay?: number;
-        href?: string;
-    },
+        delay = 0,
+    }: AnimatedTitleProps,
 ) {
     const [content, setContent] = useState(message ?? SITE_TITLE);
 
     useEffect(() => {
         if (message) {
             setContent(message);
+        } else {
+            setContent(SITE_TITLE);
         }
     }, [message]);
 
@@ -57,6 +62,7 @@ export default function AnimatedTitle(
             opacity: 1,
             y: 0,
             transition: {
+                delay: delay,
                 duration: 0.4,
                 ease: "easeOut",
             },
@@ -64,27 +70,16 @@ export default function AnimatedTitle(
         hover: {
             y: 10,
             transition: {
+                delay: delay,
                 duration: 0.2,
                 ease: "easeInOut",
             },
         },
     };
 
-    const handleHoverStart = () => {
-        const randomMessage =
-            hoverMessages[Math.floor(Math.random() * hoverMessages.length)];
-        setContent(randomMessage);
-    };
-
-    const handleHoverEnd = () => {
-        setContent(SITE_TITLE);
-    };
-
     return (
         <motion.div
             key={content}
-            onHoverStart={handleHoverStart}
-            onHoverEnd={handleHoverEnd}
             variants={containerVariants}
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
@@ -114,6 +109,81 @@ export default function AnimatedTitle(
                         {letter}
                     </motion.span>
                 ))}
+            </motion.a>
+        </motion.div>
+    );
+}
+
+export function FancyTitle({
+    isVisible,
+    message,
+    className,
+    href = "/",
+    staggerDelay = 0.03,
+    hoverMessages = ["whoami"],
+}: AnimatedTitleProps) {
+    if (!message) {
+        message = SITE_TITLE;
+    }
+
+    return (
+        <motion.div className="font-semibold text-text tracking-tighter">
+            <motion.a
+                initial="initial"
+                animate={isVisible ? "visible" : ""}
+                whileHover="hover"
+                href={href}
+                className={`relative block overflow-hidden whitespace-nowrap`}
+            >
+                <div>
+                    {message.split("").map((letter, index) => (
+                        <motion.span
+                            variants={{
+                                initial: {
+                                    y: "-100%",
+                                },
+                                visible: {
+                                    y: 0,
+                                },
+                                hover: {
+                                    y: "-100%",
+                                },
+                            }}
+                            transition={{
+                                duration: 0.4,
+                                ease: "easeInOut",
+                                delay: index * staggerDelay,
+                            }}
+                            className="inline-block"
+                            key={index}
+                        >
+                            {letter}
+                        </motion.span>
+                    ))}
+                </div>
+                <div className="absolute inset-0">
+                    {message.split("").map((letter, index) => (
+                        <motion.span
+                            variants={{
+                                initial: {
+                                    y: "100%",
+                                },
+                                hover: {
+                                    y: 0,
+                                },
+                            }}
+                            transition={{
+                                duration: 0.4,
+                                ease: "easeInOut",
+                                delay: index * staggerDelay,
+                            }}
+                            className="inline-block"
+                            key={index}
+                        >
+                            {letter}
+                        </motion.span>
+                    ))}
+                </div>
             </motion.a>
         </motion.div>
     );

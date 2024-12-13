@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({
     ariaLabel,
 }) => {
     const classes =
-        "transition p-8 border shadow border-surface1/20 hover:border-surface2/80 rounded-lg hover:bg-surface0/5";
+        "transition p-8 border hover:scale-[1.01] shadow border-surface1/20 hover:border-surface2/80 rounded-lg hover:bg-surface0/20";
 
     return (
         <StaggeredFadeIn
@@ -45,14 +45,14 @@ interface CardTitleProps {
 const CardTitle: React.FC<CardTitleProps> = ({ children, className = "" }) => {
     const isLinked = React.useContext(CardLinkContext);
     return (
-        <h3
-            className={`text-lg font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
+        <h5
+            className={`font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
         >
             {children}
             {isLinked && (
-                <HiMiniArrowUpRight className="ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <HiMiniArrowUpRight className="flex-shrink-0 ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             )}
-        </h3>
+        </h5>
     );
 };
 

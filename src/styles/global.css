@@ -25,18 +25,19 @@ html {
 	src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
 }
 body {
-	@apply bg-base text-text;
+	@apply bg-base text-text max-sm:text-sm m-0 p-0;
 	font-family: 'Inter', sans-serif;
-	margin: 0;
-	padding: 0;
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 }
 main {
-	@apply m-auto;
+	@apply m-auto max-sm:w-full max-sm:max-w-full;
 	width: 720px;
 	max-width: calc(100% - 2em);
+}
+section {
+	@apply md:py-4 px-6;
 }
 h1,
 h2,
@@ -47,19 +48,19 @@ h6 {
 	@apply tracking-tighter font-semibold leading-tight mb-2;
 }
 h1 {
-	@apply text-5xl
+	@apply text-5xl max-sm:text-4xl;
 }
 h2 {
-	@apply text-4xl;
+	@apply text-4xl max-sm:text-3xl;
 }
 h3 {
-	@apply text-3xl;
+	@apply text-3xl max-sm:text-2xl;
 }
 h4 {
-	@apply text-2xl;
+	@apply text-2xl max-sm:text-xl;
 }
 h5 {
-	@apply text-xl;
+	@apply text-xl max-sm:text-lg;
 }
 strong,
 b {
@@ -67,17 +68,17 @@ b {
 }
 p {
 	margin-bottom: 1em;
-	@apply text-text/75;
+	@apply text-text/75 max-sm:text-sm;
 }
 .prose p {
 	margin-bottom: 2em;
 }
 textarea {
 	width: 100%;
-	font-size: 16px;
+	font-size: 1rem;
 }
 input {
-	font-size: 16px;
+	font-size: 1rem;
 }
 table {
 	width: 100%;
@@ -111,15 +112,6 @@ hr {
 a {
 	@apply ring-offset-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
 }
-@media (max-width: 768px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-}
-
 .sr-only {
 	border: 0;
 	padding: 0;
