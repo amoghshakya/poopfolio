@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 interface AnimatedTitleProps {
     isVisible: boolean;
-    hoverMessages?: string[];
     message?: string;
     className?: string;
     staggerDelay?: number;
@@ -114,14 +113,21 @@ export function AnimatedTitle(
     );
 }
 
+interface FancyTitleProps {
+    isVisible?: boolean;
+    message?: string;
+    className?: string;
+    href?: string;
+    staggerDelay?: number;
+}
+
 export function FancyTitle({
-    isVisible,
+    isVisible = true,
     message,
     className,
     href = "/",
     staggerDelay = 0.03,
-    hoverMessages = ["whoami"],
-}: AnimatedTitleProps) {
+}: FancyTitleProps) {
     if (!message) {
         message = SITE_TITLE;
     }

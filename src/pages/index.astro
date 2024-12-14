@@ -5,6 +5,8 @@ import Footer from "../components/Footer.astro";
 import { Hero } from "../components/react/Hero";
 import About from "../components/react/About";
 import Projects from "../components/react/Projects";
+import Skills from "../components/react/Skills";
+import Contact from "../components/react/Contact";
 
 const projects = [
     {
@@ -37,6 +39,8 @@ const projects = [
             <Hero client:load />
             <About client:visible />
             <Projects client:visible projects={projects} />
+            <Skills client:visible />
+            <Contact client:visible />
         </main>
 
         <Footer />
