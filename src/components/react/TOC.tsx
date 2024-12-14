@@ -99,17 +99,20 @@ export default function TOC({
                 <motion.ul className="space-y-4 font-semibold">
                     {sections.map((section) => (
                         <motion.li
+                            onClick={(e: MouseEvent) => {
+                                e.preventDefault();
+                                handleClick(section.id);
+                            }}
                             key={section.id}
                             variants={childVariants}
                             whileHover={{
                                 x: 10,
-                                fontWeight: "bolder",
                                 transition: {
                                     duration: 0.2,
                                     ease: "easeIn",
                                 },
                             }}
-                            className={`relative list-none transition-all uppercase text-xs hover:font-bold select-none ${
+                            className={`cursor-pointer relative list-none transition-all uppercase text-xs select-none ${
                                 activeSection === section.id
                                     ? "!font-extrabold text-green pl-2"
                                     : "text-text/75 font-semibold"
@@ -117,13 +120,7 @@ export default function TOC({
                         >
                             {isVisible
                                 ? (
-                                    <span
-                                        className="cursor-pointer"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleClick(section.id);
-                                        }}
-                                    >
+                                    <span>
                                         {section.title}
                                     </span>
                                 )
