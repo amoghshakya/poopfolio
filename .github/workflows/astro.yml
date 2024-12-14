@@ -40,12 +40,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "20"
           cache: pnpm
           cache-dependency-path: ${{ env.BUILD_PATH }}/pnpm-lock.yaml
 
       - name: Install pnpm
-        uses: pnpm/action-setup@latest
+        uses: pnpm/action-setup@v6
         with:
           version: 7
 
