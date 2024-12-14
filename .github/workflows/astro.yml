@@ -45,7 +45,7 @@ jobs:
           cache-dependency-path: ${{ env.BUILD_PATH }}/pnpm-lock.yaml
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@v2
         with:
           version: 7
 
