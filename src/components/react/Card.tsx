@@ -25,9 +25,12 @@ const Card: React.FC<CardProps> = ({
             className={`${classes} ${className} ${
                 href && "group cursor-pointer"
             }`}
-            onClick={() => {
+            onClick={(e) => {
                 if (href) {
-                    window.open(href, target);
+                    if ((e.target as HTMLElement).tagName !== "A") {
+                        e.stopPropagation();
+                        window.open(href, target);
+                    }
                 }
             }}
         >
@@ -45,14 +48,14 @@ interface CardTitleProps {
 const CardTitle: React.FC<CardTitleProps> = ({ children, className = "" }) => {
     const isLinked = React.useContext(CardLinkContext);
     return (
-        <h5
-            className={`font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
+        <h3
+            className={`text-xl font-bold mb-2 flex items-center group-hover:text-surface3 transition ${className}`}
         >
             {children}
             {isLinked && (
                 <HiMiniArrowUpRight className="flex-shrink-0 ml-2 w-4 h-4 opacity-75 group-hover:opacity-100 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             )}
-        </h5>
+        </h3>
     );
 };
 

@@ -6,14 +6,12 @@ import { Hero } from "../components/react/Hero";
 import About from "../components/react/About";
 import Projects from "../components/react/Projects";
 import Skills from "../components/react/Skills";
-import Contact from "../components/react/Contact";
 
 const projects = [
     {
         title: "SikshaYatri",
         description:
             "Developed a demo e-learning platform web app using Next.js and PostgreSQL for my sophomore year Software Engineering coursework. Used Prisma ORM and Neon for database and next-auth for authentication.",
-
         href: "https://youtu.be/oz0KJD5Y2GQ",
         github: "https://github.com/amoghshakya/e-learning-platform",
         youtube: "https://youtu.be/oz0KJD5Y2GQ",
@@ -40,7 +38,6 @@ const projects = [
             <About client:visible />
             <Projects client:visible projects={projects} />
             <Skills client:visible />
-            <Contact client:visible />
         </main>
 
         <Footer />

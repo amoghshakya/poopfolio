@@ -6,10 +6,18 @@ interface StaggeredFadeInProps extends React.HTMLProps<HTMLDivElement> {
     className?: string;
     delay?: number;
     duration?: number;
+    applyChildClasses?: boolean;
 }
 
 const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = (
-    { children, className, delay = 0.03, duration = 0.6, ...props },
+    {
+        children,
+        className,
+        delay = 0.03,
+        duration = 0.6,
+        applyChildClasses = false,
+        ...props
+    },
 ) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -56,8 +64,13 @@ const StaggeredFadeIn: React.FC<StaggeredFadeInProps> = (
                 (child, index) => (
                     React.isValidElement(child) &&
                     (
-                        <motion.div variants={childVariants} key={index}>
-                            {child}
+                        <motion.div
+                            variants={childVariants}
+                            key={index}
+                            className={applyChildClasses &&
+                                child.props.className}
+                        >
+                            {applyChildClasses ? child.props.innerHTML : child}
                         </motion.div>
                     )
                 ),

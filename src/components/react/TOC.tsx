@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { AnimatedTitle } from "./Title";
 import { useIsMobile } from "./hooks/useIsMobile";
 
 interface IProps {

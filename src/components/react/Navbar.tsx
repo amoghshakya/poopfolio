@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { FancyTitle as AnimatedTitle } from "./Title";
 import TOC from "./TOC";
 import { useIsMobile } from "./hooks/useIsMobile";
-import { FaGithub } from "react-icons/fa6";
+import Socials from "./Socials";
 
 export default function Navbar(
-    { sections, hoverMessages }: {
+    { sections }: {
         sections: { id: string; title: string }[];
-        hoverMessages?: string[];
     },
 ) {
     const [isVisible, setIsVisible] = useState(false);
@@ -35,12 +34,9 @@ export default function Navbar(
                     >
                         <AnimatedTitle
                             isVisible={isVisible}
-                            hoverMessages={hoverMessages}
                         />
                         <TOC sections={sections} isVisible={isVisible} />
-                        <div>
-                            <FaGithub className="h-6 w-6 opacity-75 hover:opacity-100" />
-                        </div>
+                        <Socials />
                     </header>
                 )}
         </>

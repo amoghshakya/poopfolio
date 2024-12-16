@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "motion/react";
 import StaggeredFadeIn from "./StaggeredFadeIn";
 import { useIsMobile } from "./hooks/useIsMobile";
 
